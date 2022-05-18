@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+*{
+  box-sizing: border-box;
+  
+}
+
+body {
+    background-color: lightslategray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: #363636;
+}
+
+h1 {
+    color: whitesmoke;
+    align-self: center;
+    margin-left: 8rem;
+}
+
+h3 {
+  color: whitesmoke;
+}
+
+#search {
+  margin: 0rem;
+  margin-left: 0rem;
+  background-color: white;
+  border: 2px solid purple;
+  border-radius: 50px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.5rem;
+  padding: 0.5rem 5rem;
+}
+
+#dropdownMenuButton {
+  margin: 0rem;
+  border: 2px solid purple;
+  border-radius: 50px;
+  padding: 1rem 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+
+}
+
+.dropdown-menu {
+  border-radius: 20px;
+  background-color:lightgrey;
+
+}
+
+.dropdown-item {
+  border-radius: 15px;
+}
+
+#search::placeholder {
+  color: #7378c5;
+}
+
+#search:focus {
+  background-color: #13b38e;
+  outline: none;
+}
