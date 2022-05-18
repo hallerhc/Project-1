@@ -1,54 +1,152 @@
-const X_Rapid_APIURL = "https://streaming-availability.p.rapidapi.com?api_key=9ae30173d2mshe0e6c6346179a2fp1dd180jsn391ed5dafc14";
-const TMDB_APIURL = "https://api.themoviedb.org/3/movie/550?api_key=6e3cca9aefb3a98e3fb5a3cc02e5eadd";
-
-const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?api_key=6e3cca9aefb3a98e3fb5a3cc02e5eadd";
-
-const text = document.getElementsByClassName('.form-control');
-
-const main = document.getElementById('#content');
-
-getMovies_Rapid(X_Rapid_APIURL);
-getMovies_Tmdb(TMDB_APIURL);
-
-async function getMovies_Rapid(url) {
-  const resp = await fetch(url);
-  const respData = await resp.json();
-
-  showMovies(respData.results);
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Host': 'movie87.p.rapidapi.com',
+		'X-RapidAPI-Key': '9ae30173d2mshe0e6c6346179a2fp1dd180jsn391ed5dafc14'
+	}
 };
 
-async function getMovies_Tmdb(url) {
-  const resp = await fetch(url);
-  const respData = await resp.json();
+const body = document.getElementById("#content");
+const search = document.getElementById("#search");
+const button_title = document.getElementById("#title");
+const button_trailer = document.getElementById("#trailer");
+const button_genre = document.getElementById("#genre");
 
-  showMovies(respData.results);
-};
+getMovies_ByTitle(response);
+getMovies_ByTrailer(response);
+getMovies_ByGenre(response);
+
+function getMovies_ByTitle(response) {
+  fetch('https://movie87.p.rapidapi.com/title/%7Bid%7D', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+  const res_data = response.results;
+
+  showMovie_ByTitle(res_data);
+}
+
+function getMovies_ByTrailer(response) {
+  fetch('https://movie87.p.rapidapi.com/tailor/vid/%7Bid%7D', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+  const res_data = response.results;
+
+  showMovie_ByTrailer(res_data);
+}
+
+function getMovies_ByGenre(response) {
+  fetch('https://movie87.p.rapidapi.com/Movie/gener/come', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+  const res_data = response.results;
+
+  showMovie_ByGenre(res_data);
+}
 
 
-function showMovies() {
+function showMovie_ByTitle(movies) {
+  body.innerHTML = "";
 
+  movies.forEach((movie) => {
+    const {poster_path, title, rating} = movie;
 
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie");
 
-};
+    movieEl.innerHTML = `
+      <img 
+        src="${IMGPATH + poster_path}" 
+        alt="${title}"
+      />
+      <div class="movie-info"> 
+        <h3>${title}</h3>
+        <span>${rating}</span>
+      </div>
 
-function getMovieByRating() {
+      `;
 
+    body.appendChild(movieEl);
 
-};
+  });
+}
 
+function showMovie_ByTrailer(movies) {
+  body.innerHTML = "";
 
-dropdown-item.addElementListener("click", (e) => {
+  movies.forEach((movie) => {
+    const {poster_path, title, rating} = movie;
 
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie");
+
+    movieEl.innerHTML = `
+      <img 
+        src="${IMGPATH + poster_path}" 
+        alt="${title}"
+      />
+      <div class="movie-info"> 
+        <h3>${title}</h3>
+        <span>${rating}</span>
+      </div>
+
+      `;
+
+    body.appendChild(movieEl);
+
+  });
+  
+}
+
+function showMovie_ByGenre(movies) {
+  body.innerHTML = "";
+
+  movies.forEach((movie) => {
+    const {poster_path, title, rating} = movie;
+
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie");
+
+    movieEl.innerHTML = `
+      <img 
+        src="${IMGPATH + poster_path}" 
+        alt="${title}"
+      />
+      <div class="movie-info"> 
+        <h3>${title}</h3>
+        <span>${rating}</span>
+      </div>
+
+      `;
+
+    body.appendChild(movieEl);
+
+  });
+  
+}
+
+const button = document.querySelector(".dropdown-menu");
+
+button.addEventListener("click", buttonClick);
+
+function buttonClick(e) {
   e.preventDefault();
 
-  const searchItem = text.value;
+  if (search.value && button_title) {
 
-  if (searchItem) {
+    getMovies_ByTitle(search.value);
 
-    getMovies_Rapid(SEARCHAPI + searchItem);
+  }else if(search.value && button_actor){
+
+    getMovies_ByActor(search.value);
+
+  }else {
+
+    getMovies_ByGenre(search.value);
 
   }
+}
 
-  text.value = "";
-});
-
+  

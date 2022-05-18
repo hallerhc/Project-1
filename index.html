@@ -27,25 +27,22 @@
         <strong>Seach for a movie:</strong>
       </h3>
       <div class="input-group mt-3 mb-3">
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" class="form-control" id="search" placeholder="Search">
         <div class="input-group-append">
-          <!-- <button class=" btn bg-info text-light" id="search-button">
-                        <i class="fa fa-search"></i>
-                      </button> -->
           <div class="dropdown">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               Search By
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Title</a>
-              <a class="dropdown-item" href="#">Genre</a>
-              <a class="dropdown-item" href="#">Rating</a>
+              <a class="dropdown-item" id="title" href="#">Title</a>
+              <a class="dropdown-item" id="trailer" href="#">Trailer</a>
+              <a class="dropdown-item" id="genre" href="#">Genre</a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div id="content"></div>
-    <script src="script.js"></script>
+      </div</div>
+      <div id="content"></div>
+      <script src="script.js"></script>
+    </body>
   </body>
 </html>
