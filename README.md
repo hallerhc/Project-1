@@ -14,6 +14,6 @@ Get your key from: <strong>RapidAPI</strong> platform.
 
 ## Live Link
 
-paste github livepage here
+https://hallerhc.github.io/Project-1/ 
  
 ![Screenshot of deployed application](./images/ScreenShot_%20MovieFinder.png)
