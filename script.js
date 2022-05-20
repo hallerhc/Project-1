@@ -1,71 +1,54 @@
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Host': 'movie87.p.rapidapi.com',
-		'X-RapidAPI-Key': '9ae30173d2mshe0e6c6346179a2fp1dd180jsn391ed5dafc14'
-	}
-};
+const body = document.getElementById("content");
+const search = document.getElementById("search");
 
-const body = document.getElementById("#content");
-const search = document.getElementById("#search");
-const button_title = document.getElementById("#title");
-const button_trailer = document.getElementById("#trailer");
-const button_genre = document.getElementById("#genre");
-
-getMovies_ByTitle(response);
-getMovies_ByTrailer(response);
-getMovies_ByGenre(response);
-
-function getMovies_ByTitle(response) {
-  fetch('https://movie87.p.rapidapi.com/title/%7Bid%7D', options)
+function getMovies(inputData) {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
+      'X-RapidAPI-Key': '9ae30173d2mshe0e6c6346179a2fp1dd180jsn391ed5dafc14'
+    }
+  };
+  fetch('https://moviesdatabase.p.rapidapi.com/titles/search/title/'+ inputData + '?info=mini_info&limit=10&page=1&titleType=movie', options)
 	.then(response => response.json())
-	.then(response => console.log(response))
+	.then(response => {
+    console.log(response)
+    showMovie(response.results);
+  } )
 	.catch(err => console.error(err));
-  const res_data = response.results;
 
-  showMovie_ByTitle(res_data);
 }
 
-function getMovies_ByTrailer(response) {
-  fetch('https://movie87.p.rapidapi.com/tailor/vid/%7Bid%7D', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
-  const res_data = response.results;
-
-  showMovie_ByTrailer(res_data);
-}
-
-function getMovies_ByGenre(response) {
-  fetch('https://movie87.p.rapidapi.com/Movie/gener/come', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
-  const res_data = response.results;
-
-  showMovie_ByGenre(res_data);
-}
-
-
-function showMovie_ByTitle(movies) {
+function showMovie(movies) {
   body.innerHTML = "";
 
   movies.forEach((movie) => {
-    const {poster_path, title, rating} = movie;
-
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
 
+    var poster = "";
+    if (movie.primaryImage) {
+        poster = movie.primaryImage.url
+    }else {
+      poster = "";
+    }
+
+    var year = "";
+    if (movie.releaseYear) {
+        year = movie.releaseYear.year
+    }else {
+      year = "";
+    }
+
     movieEl.innerHTML = `
       <img 
-        src="${IMGPATH + poster_path}" 
-        alt="${title}"
+        src="${poster}" 
+        alt="${movie.titleText.text}"
       />
-      <div class="movie-info"> 
-        <h3>${title}</h3>
-        <span>${rating}</span>
+      <div class="movie-info">
+      <h3>${movie.titleText.text}</h3>
+      <h4>${year}</h4>
       </div>
-
       `;
 
     body.appendChild(movieEl);
@@ -73,80 +56,30 @@ function showMovie_ByTitle(movies) {
   });
 }
 
-function showMovie_ByTrailer(movies) {
-  body.innerHTML = "";
+// const button = document.querySelector(".btn");
 
-  movies.forEach((movie) => {
-    const {poster_path, title, rating} = movie;
+// button.addEventListener("click", buttonClick);
 
-    const movieEl = document.createElement("div");
-    movieEl.classList.add("movie");
+// function buttonClick(e) {
+//   e.preventDefault();
 
-    movieEl.innerHTML = `
-      <img 
-        src="${IMGPATH + poster_path}" 
-        alt="${title}"
-      />
-      <div class="movie-info"> 
-        <h3>${title}</h3>
-        <span>${rating}</span>
-      </div>
+//   const searchTerm = search.value
 
-      `;
+//   //console.log(searchTerm);
 
-    body.appendChild(movieEl);
+//   if (searchTerm) {
+//      getMovies(searchTerm);
+//      search.value = "";
+//     }
+// }
 
-  });
-  
-}
-
-function showMovie_ByGenre(movies) {
-  body.innerHTML = "";
-
-  movies.forEach((movie) => {
-    const {poster_path, title, rating} = movie;
-
-    const movieEl = document.createElement("div");
-    movieEl.classList.add("movie");
-
-    movieEl.innerHTML = `
-      <img 
-        src="${IMGPATH + poster_path}" 
-        alt="${title}"
-      />
-      <div class="movie-info"> 
-        <h3>${title}</h3>
-        <span>${rating}</span>
-      </div>
-
-      `;
-
-    body.appendChild(movieEl);
-
-  });
-  
-}
-
-const button = document.querySelector(".dropdown-menu");
-
-button.addEventListener("click", buttonClick);
-
-function buttonClick(e) {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (search.value && button_title) {
-
-    getMovies_ByTitle(search.value);
-
-  }else if(search.value && button_actor){
-
-    getMovies_ByActor(search.value);
-
-  }else {
-
-    getMovies_ByGenre(search.value);
-
-  }
-}
-
+  const searchTerm = search.value;
   
+  if (searchTerm) {
+  getMovies(searchTerm);
+  search.value = "";
+  }
+});

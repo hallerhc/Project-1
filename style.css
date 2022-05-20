@@ -5,62 +5,88 @@
 }
 
 body {
-    background-color: lightslategray;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 0;
-}
+  background-color: #030303;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  }
 
 header {
-    background-color: #363636;
-}
+  background-color: #363636;
+  display: flex;
+  }
 
-h1 {
-    color: whitesmoke;
-    align-self: center;
-    margin-left: 8rem;
-}
-
-h3 {
+  h1{
   color: whitesmoke;
-}
+  align-self: center;
+  margin-left: 28rem;
+  }
 
-#search {
-  margin: 0rem;
-  margin-left: 0rem;
-  background-color: white;
-  border: 2px solid purple;
-  border-radius: 50px;
-  color: #fff;
-  font-family: inherit;
-  font-size: 1.5rem;
-  padding: 0.5rem 5rem;
-}
-
-#dropdownMenuButton {
-  margin: 0rem;
-  border: 2px solid purple;
-  border-radius: 50px;
-  padding: 1rem 1.5rem;
-  font-family: inherit;
-  font-size: 1rem;
-
-}
-
-.dropdown-menu {
-  border-radius: 20px;
-  background-color:lightgrey;
-
-}
-
-.dropdown-item {
-  border-radius: 15px;
-}
+  .search {
+    margin: 3rem;
+    margin-left: 12rem;
+    background-color: transparent;
+    border: 2px solid #e9e9ec;
+    border-radius: 50px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    }
 
 #search::placeholder {
   color: #7378c5;
 }
 
-#search:focus {
-  background-color: #13b38e;
+.search:focus {
+  background-color: #050505;
   outline: none;
+  }
+
+.btn {
+  padding: 1rem;
+  border-radius: 20px;
 }
+
+div{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movie {
+  background-color: #373b69;
+  border-radius: 3px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  margin: 1rem;
+  justify-content: center;
+  align-content: center;
+  width: 265px;
+}
+
+.movie img {
+  width: 100%;
+}
+
+.movie-info {
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem 1rem;
+  letter-spacing: 0.5px;
+}
+
+.movie-info h3 {
+  margin: 0;
+}
+
+.movie-info span {
+  background-color: #22254b;
+  border-radius: 3px;
+  font-weight: bold;
+  padding: 0.25rem 0.8rem;
+
+}
+
